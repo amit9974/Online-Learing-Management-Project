@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+
 <!-- HERO
     ================================================== -->
     <section class="py-13 pt-xl-14 mt-n13 pb-lg-12 bg-cover position-relative" style="background: linear-gradient(90deg, #FFEBE5 0.13%, #EDEAF6 100.01%);">
@@ -26,7 +27,7 @@
 
                     <!-- Buttons -->
                     <a href="course-list-v1.html" class="btn btn-tangerine btn-wide rounded-lg mb-4 mb-md-0 me-md-5 text-w" data-aos="fade-up" data-aos-duration="200">GET STARTED</a>
-                    <a href="course-list-v1.html" class="btn btn-gigas btn-wide rounded-lg d-none d-lg-inline-block" data-aos="fade-up" data-aos-duration="200">VIEW COURSES</a>
+                    <a href="{% url 'course_list' %}" class="btn btn-gigas btn-wide rounded-lg d-none d-lg-inline-block" data-aos="fade-up" data-aos-duration="200">VIEW COURSES</a>
                 </div>
             </div> <!-- / .row -->
         </div> <!-- / .container -->
@@ -74,7 +75,7 @@
                                         </a>
                                     </div>
 
-                                    <a href="course-single-v1.html" class="d-flex"><img class="card-img-top img-fluid o-f-c" src="assets/img/products/product-1.jpg" alt="..."></a>
+                                    <a href="course-single-v1.html" class="d-flex"><img class="card-img-top img-fluid o-f-c" src="{% static 'assets/img/products/product-1.jpg' %}" alt="..."></a>
 
                                     <span class="badge sk-fade-bottom badge-lg badge-tangerine badge-pill badge-float bottom-0 left-0 mb-4 ms-4">
                                         <span class="text-white text-uppercase fw-bold font-size-xs">BEST SELLER</span>
@@ -421,7 +422,7 @@
             </div>
 
             <div class="text-center">
-                <a href="course-list-v5.html" class="btn btn-gigas btn-x-wide rounded-lg lift">VIEW ALL COURSES</a>
+                <a href="{% url 'course_list' %}" class="btn btn-gigas btn-x-wide rounded-lg lift">VIEW ALL COURSES</a>
             </div>
         </div>
     </section>
