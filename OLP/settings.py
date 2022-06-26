@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'OLP.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'skola_data',
+        'NAME': 'skola',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
@@ -133,8 +133,8 @@ STATICFILES_DIRS = [
 ]
 
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/login/'
+LOGIN_URL = 'login/'
+LOGIN_REDIRECT_URL = 'login'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'

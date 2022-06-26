@@ -4,7 +4,7 @@ from django.contrib import messages
 from traitlets import Instance
 from app.EmailBackend import EmailBackend
 from django.contrib.auth import authenticate,login,logout
-
+from django.contrib.auth.decorators import login_required
 
 def REGISTER(request):
     if request.method == "POST":
@@ -80,3 +80,5 @@ def profile_update(request):
         user.save()
         messages.success(request, "Profile has been updated successfully! ")
         return redirect('profile')
+
+

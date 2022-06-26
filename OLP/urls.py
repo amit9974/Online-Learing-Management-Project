@@ -17,15 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from . import user_login
+from . import user_login, student_login
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('app/',include('app.urls')),
     path('base/', views.base, name='base'),
     path('',views.home, name='home'),
     path('accounts/',include('django.contrib.auth.urls')),
     path('accounts/register',user_login.REGISTER,name='register'),
-    # path('python_developer/', views.python_developer, name='python_developer'),
+    path('python_developer/', views.python_developer, name='python_developer'),
     # path('python_django/', views.python_django, name='python_django'),
     # path('python_data_science/', views.python_data_science, name='python_data_science'),
     # path('node_js/', views.node_js, name='node_js'),
@@ -42,6 +45,8 @@ urlpatterns = [
     path('about-us/', views.about_us, name='about-us'),
     path('profile/', user_login.profile, name='profile'),
     path('accounts/profile/update', user_login.profile_update, name='profile_update'),
+    path('my_course/', views.my_course, name= 'my_course'),
+
     
-]
-    
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

@@ -1,20 +1,31 @@
+from typing import Counter
 from unicodedata import category
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from app.models import ContactForm, CourseList, CourseCategory
+from app.models import *
 from django.contrib import messages
+
 
 def base(request):
     return render(request, 'base.html')
 
 
 def home(request):
-    cat = CourseCategory.objects.all()
-    return render(request, 'home.html',{'cat':cat})
+    category = CourseCategory.objects.all().order_by('id')
+    course = CourseList.objects.filter(status='PUBLISH').order_by('-id')
+    author = Author.objects.all()
+    context = {
+        'category':category,
+        'course': course,
+        'author':author,
+    }
+
+    return render(request, 'home.html',context)
     
-# @login_required(login_url='')    
-# def python_developer(request):
-#     return render(request, 'courses/Python Developer.html')
+ 
+def python_developer(request):
+    return render(request, 'courses/Python Developer.html')
 
 # def python_data_science(request):
 #     return render(request,'courses/Python DataScience.html')
@@ -45,11 +56,15 @@ def home(request):
 
 
 def course_list(request):
-    course = CourseList.objects.all()
-    return render(request, 'courses/all_course.html',{'course':course})
-
-
-
+    category = CourseCategory.objects.all().order_by('id')
+    course = CourseList.objects.filter(status='PUBLISH').order_by('-id')
+    author = Author.objects.all()
+    context = {
+        'category':category,
+        'course': course,
+        'author':author,
+    }
+    return render(request, 'courses/all_course.html',context)
 
 
 def contact_us(request):
@@ -61,10 +76,15 @@ def contact_us(request):
         msg.save()
         messages.success(request,'Your message has been send successfully')
         return redirect('contact-us')
-
     return render(request, 'contact.html')
-
 
 
 def about_us(request):
     return render(request, 'about-us.html')
+
+
+
+
+@login_required(login_url='doLogin')
+def my_course(request):
+    return render(request,'courses/html.html')
