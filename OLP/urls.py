@@ -46,7 +46,6 @@ urlpatterns = [
     path('profile/', user_login.profile, name='profile'),
     path('accounts/profile/update', user_login.profile_update, name='profile_update'),
     path('my_course/', views.my_course, name= 'my_course'),
-
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

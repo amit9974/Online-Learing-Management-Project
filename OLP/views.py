@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from app.models import *
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 
 def base(request):
@@ -60,11 +62,12 @@ def course_list(request):
     course = CourseList.objects.filter(status='PUBLISH').order_by('-id')
     author = Author.objects.all()
     context = {
-        'category':category,
+        'category': category,
         'course': course,
-        'author':author,
+        'author': author,
     }
     return render(request, 'courses/all_course.html',context)
+
 
 
 def contact_us(request):
@@ -83,8 +86,6 @@ def about_us(request):
     return render(request, 'about-us.html')
 
 
-
-
-@login_required(login_url='doLogin')
 def my_course(request):
     return render(request,'courses/html.html')
+

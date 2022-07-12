@@ -104,21 +104,25 @@
                         </div>
 
                         <a href="course-single-v5.html" class="card-img sk-thumbnail d-block">
-                            <img class="rounded shadow-light-lg" src="{{i.image.url}}" alt="...">
+                            <img class="rounded shadow-light-lg" src="{{i.image.url}}" style="height:200px;">
                         </a>
 
-                        <span class="badge sk-fade-bottom badge-lg badge-orange badge-pill badge-float bottom-0 left-0 mb-4 ms-4">
-                            <span class="text-white text-uppercase fw-bold font-size-xs">BEST SELLER</span>
+                        <span class="badge sk-fade-bottom badge-lg badge-blue badge-pill badge-float bottom-0 left-0 mb-4 ms-4">
+                            <span class="text-white text-uppercase fw-bold font-size-xs">NEW</span>
                         </span>
                     </div>
 
                     <!-- Footer -->
                     <div class="card-footer px-2 pb-2 mb-1 pt-4 position-relative">
-                        <a href="instructors-single.html" class="d-block">
+                        
+                        <a href="#" class="d-block">
+                            {% for i in author %}
                             <div class="avatar sk-fade-right avatar-xl badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg">
-                                <img src="{% static 'assets/img/avatars/avatar-1.jpg' %}" alt="..." class="avatar-img rounded-circle">
+                                <img src="{{i.author_profile.url}}" alt="..." class="avatar-img rounded-circle">
                             </div>
+                            {% endfor %}
                         </a>
+                        
 
                         <!-- Preheading -->
                         <a href="course-single-v5.html"><span class="mb-1 d-inline-block text-gray-800">{{i.category}}</span></a>
