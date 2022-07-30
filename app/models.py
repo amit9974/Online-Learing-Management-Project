@@ -1,8 +1,11 @@
 from asyncio.windows_events import NULL
 from distutils.command.build import build
 from django.db import models
-# Create your models here.
+from django.utils.text import slugify
+from django.db.models.signals import pre_save
 
+
+# Create your models here.
 # Contact Form Model
 class ContactForm(models.Model):
     name = models.CharField(max_length=50)
@@ -56,16 +59,28 @@ class CourseList(models.Model):
     def __str__(self) -> str:
         return self.title
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("course_details", kwargs={'slug': self.slug}) 
 
 
+def create_slug(instance, new_slug=None):
+    slug = slugify(instance.title)
+    if new_slug is not None:
+        slug = new_slug
+    qs = CourseList.objects.filter(slug=slug).order_by('-id')
+    exists = qs.exists()
+    if exists:
+        new_slug = "%s-%s" % (slug, qs.first().id)
+        return create_slug(instance, new_slug=new_slug)
+    return slug
 
-# Students
-class Student(models.Model):
-    first_name = models.CharField(max_length=100, null=True)
-    last_name = models.CharField(max_length=100, null=True)
-    email = models.EmailField(max_length=100)
-    username = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
 
-    def __str__(self) -> str:
-        return self.name
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_slug(instance)
+
+pre_save.connect(pre_save_post_receiver, CourseList)
+
+
+   

@@ -1,12 +1,7 @@
-from typing import Counter
-from unicodedata import category
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from app.models import *
 from django.contrib import messages
-from django.template.loader import render_to_string
-from django.http import JsonResponse
 
 
 def base(request):
@@ -22,10 +17,57 @@ def home(request):
         'course': course,
         'author':author,
     }
-
     return render(request, 'home.html',context)
     
- 
+
+def course_list(request):
+    category = CourseCategory.objects.all().order_by('id')
+    course = CourseList.objects.filter(status='PUBLISH').order_by('-id')
+    author = Author.objects.all()
+    context = {
+        'category': category,
+        'course': course,
+        'author': author,
+    }
+    return render(request, 'courses/all_course.html',context)
+
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        msg = ContactForm.objects.create(name=name,email=email,message=message)
+        msg.save()
+        messages.success(request,'Your message has been send successfully')
+        return redirect('contact-us')
+    return render(request, 'contact.html')
+
+
+def about_us(request):
+    return render(request, 'about-us.html')
+
+@login_required
+def my_course(request):
+    return render(request,'courses/html.html')
+
+def search_course(request):
+    query = request.GET['query']
+    course = CourseList.objects.filter(title__icontains = query)
+    context = {
+        'course':course
+    }
+    return render(request, 'search/search.html',context)
+
+
+def course_details(request, slug):
+    course = CourseList.objects.filter(slug = slug)
+    context = {
+        'course': course
+    }
+    return render(request, 'courses/Python Django.html', context)
+
+
 def python_developer(request):
     return render(request, 'courses/Python Developer.html')
 
@@ -57,35 +99,4 @@ def python_developer(request):
 #     return render(request, 'courses/Backend.html')
 
 
-def course_list(request):
-    category = CourseCategory.objects.all().order_by('id')
-    course = CourseList.objects.filter(status='PUBLISH').order_by('-id')
-    author = Author.objects.all()
-    context = {
-        'category': category,
-        'course': course,
-        'author': author,
-    }
-    return render(request, 'courses/all_course.html',context)
-
-
-
-def contact_us(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
-        msg = ContactForm.objects.create(name=name,email=email,message=message)
-        msg.save()
-        messages.success(request,'Your message has been send successfully')
-        return redirect('contact-us')
-    return render(request, 'contact.html')
-
-
-def about_us(request):
-    return render(request, 'about-us.html')
-
-
-def my_course(request):
-    return render(request,'courses/html.html')
 
