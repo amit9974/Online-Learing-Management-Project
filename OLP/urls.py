@@ -36,18 +36,8 @@ urlpatterns = [
     path('accounts/profile/update', user_login.profile_update, name='profile_update'),
     path('my_course/', views.my_course, name= 'my_course'),
     path('search/', views.search_course, name='search_course'),
-    path('course/<slug:slug>', views.course_details, name='course_details'),
+    path("course_details/<slug>/",views.course_details,name="course_details"),
 
-    # path('python_developer/', views.python_developer, name='python_developer'),
-    # path('python_django/', views.python_django, name='python_django'),
-    # path('python_data_science/', views.python_data_science, name='python_data_science'),
-    # path('node_js/', views.node_js, name='node_js'),
-    # path('machine_learing/', views.machine_learning, name='machine_learning'),
-    # path('jquerry/', views.jquerry, name='jquerry'),
-    # path('javascript/', views.javascript, name='javascript'),
-    # path('html', views.html, name='html'),
-    # path('full_stack_developer/', views.full_stack, name='full_stack_developer'),
-    # path('backend/', views.backend, name='backend'),
 
 
 

@@ -65,7 +65,7 @@ def course_details(request, slug):
     context = {
         'course': course
     }
-    return render(request, 'courses/Python Django.html', context)
+    return render(request, 'courses/course_details.html', context)
 
 
 def python_developer(request):
