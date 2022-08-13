@@ -2,11 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from app.models import *
 from django.contrib import messages
-
-
-def base(request):
-    return render(request, 'base.html')
-
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     category = CourseCategory.objects.all().order_by('id')
@@ -47,7 +43,7 @@ def contact_us(request):
 def about_us(request):
     return render(request, 'about-us.html')
 
-@login_required
+
 def my_course(request):
     return render(request,'courses/html.html')
 
@@ -59,44 +55,19 @@ def search_course(request):
     }
     return render(request, 'search/search.html',context)
 
-
+@login_required(login_url='/accounts/login')
 def course_details(request, slug):
     course = CourseList.objects.filter(slug = slug)
+    author = Author.objects.all()
+    all_course = CourseList.objects.all()
     context = {
-        'course': course
+        'course': course,
+        'author':author,
+        'all_course':all_course,
     }
     return render(request, 'courses/course_details.html', context)
 
 
-def python_developer(request):
-    return render(request, 'courses/Python Developer.html')
-
-# def python_data_science(request):
-#     return render(request,'courses/Python DataScience.html')
-
-# def python_django(request):
-#     return render(request, 'courses/Python Django.html')
-
-# def node_js(request):
-#     return render(request, 'courses/Node Js.html')
-
-# def machine_learning(request):
-#     return render(request, 'courses/Machine Learning.html')
-
-# def jquerry(request):
-#     return render(request, 'courses/Jquerry.html')
-
-# def javascript(request):
-#     return render(request, 'courses/JavaScript.html')
-
-# def html(request):
-#     return render(request, 'courses/Html.html')
-
-# def full_stack(request):
-#     return render(request, 'courses/Full stack.html')
-
-# def backend(request):
-#     return render(request, 'courses/Backend.html')
 
 
 

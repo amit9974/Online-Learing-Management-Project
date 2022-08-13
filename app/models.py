@@ -50,11 +50,18 @@ class CourseList(models.Model):
     created_at = models.DateField(auto_now_add=True)
     author = models.ForeignKey(Author,on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(CourseCategory, on_delete=models.CASCADE, null=True)
-    description =models.TextField(max_length=400)
+    description =models.TextField()
     price = models.IntegerField(null=True)
     discount = models.IntegerField(null=True)
     slug = models.SlugField(default='',max_length=500,null=True,blank=True)
     status = models.CharField(choices=STATUS,max_length=100,null=True)
+    duration = models.CharField(max_length=50, null=True)
+    lecture = models.IntegerField(null=True)
+    enroll_course = models.CharField(max_length=100, null=True, blank=True)
+    language = models.CharField(max_length=100, null=True)
+    skill_level = models.CharField(max_length=50, null=True)
+    certificate = models.CharField(max_length=4,null=True)
+
 
     def __str__(self) -> str:
         return self.title

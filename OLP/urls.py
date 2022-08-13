@@ -24,7 +24,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/',include('app.urls')),
-    path('base/', views.base, name='base'),
     path('',views.home, name='home'),
     path('accounts/',include('django.contrib.auth.urls')),
     path('accounts/register',user_login.REGISTER,name='register'),
@@ -40,7 +39,7 @@ urlpatterns = [
 
 
 
-
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

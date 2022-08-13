@@ -1,6 +1,4 @@
 {% load static %}
-
-
 <header class="navbar navbar-expand-xl navbar-light" >
         <div class="container">
             <!-- Brand -->
@@ -39,7 +37,7 @@
                             <div class="dropdown-menu ps-3 top-0 pe-0 py-0 shadow-none bg-transparent">
                                 <div class="dropdown-menu-md bg-primary rounded dropdown-menu-inner">
                                     {% for i in cat.courselist_set.all %}
-                                    <a class="dropdown-item" href="course-single-v1.html">
+                                    <a class="dropdown-item" href="/course_details/{{i.slug}}/">
                                         {{i.title}}
                                     </a>
                                     {% endfor %}
@@ -84,15 +82,13 @@
                         <a class="nav-link text-gigas"  href="{% url 'contact-us' %}">
                             Contact Us
                         </a>
-
                     </li>
                     <li class="nav-item dropdown dropdown-full-width">
                         <a class="nav-link text-gigas"  href="{% url 'course_list' %}">
-                            My Courses
+                            Our Courses
                         </a>
                     </li>
-                   
-                     {% if user.is_authenticated and user.first_name == '' %}
+                    {% if user.is_authenticated and user.first_name == '' %}
                      <li class="nav-item dropdown border-0 px-1 px-md-3">
                          <a class="nav-link dropdown-toggle" id="user" data-bs-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">
                            Welcome , {{user.username}}
@@ -140,7 +136,6 @@
                             </li>
                         </ul>
                     </li>
-
                      {% else %}
                 <li class="nav-item border-0 px-1 px-md-3 mt-3">
                     <!-- Button trigger account modal -->
@@ -158,11 +153,6 @@
 
             <!-- Search, Account & Cart -->
             <ul class="navbar-nav flex-row ms-n4 ms-sm-auto ms-xl-0 me-n2 me-md-n4">
-
-
-
-
-
                 <li class="nav-item border-0 px-1 px-md-3 d-none d-370-block d-xl-block">
                     <a class="nav-link d-flex p-3 bg-white-all rounded-circle search-mobile text-gigas icon-xs" data-bs-toggle="collapse" href="#collapseSearchMobile" role="button" aria-expanded="false" aria-controls="collapseSearchMobile">
                         <!-- Icon -->
