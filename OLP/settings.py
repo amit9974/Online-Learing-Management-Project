@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'crispy_forms',
-    
+
     ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -133,8 +134,8 @@ STATICFILES_DIRS = [
 ]
 
 
-LOGIN_URL='login'
-LOGIN_REDIRECT_URL='login'
+LOGIN_URL='/accounts/login'
+LOGIN_REDIRECT_URL='/accounts/login/'
 
 LOGOUT_REDIRECT_URL = 'home'
 

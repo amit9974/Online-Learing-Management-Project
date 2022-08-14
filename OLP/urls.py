@@ -35,8 +35,9 @@ urlpatterns = [
     path('accounts/profile/update', user_login.profile_update, name='profile_update'),
     path('my_course/', views.my_course, name= 'my_course'),
     path('search/', views.search_course, name='search_course'),
+    path('404/',views.page_404,name='404'),
     path("course_details/<slug>/",views.course_details,name="course_details"),
-
+    path("enroll_course/<slug>/", views.enroll_course,name="enroll_course"),
 
 
     
