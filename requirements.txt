@@ -91,7 +91,6 @@ tzdata==2022.4
 tzlocal==4.2
 uritools==4.0.1
 urllib3==1.26.14
-vboxapi==1.0
 virtualenv==20.17.1
 wcwidth==0.2.6
 webencodings==0.5.1
