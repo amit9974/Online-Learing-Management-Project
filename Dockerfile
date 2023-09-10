@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM ubuntu
 WORKDIR /ci_application
 COPY . /ci_application
 RUN pip install --upgrade pip && pip install -r requirements.txt
